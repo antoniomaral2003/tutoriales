@@ -1,13 +1,15 @@
 package org.iesvdm.tutoriales.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -22,6 +24,9 @@ public class Categoria {
 
     private String nombre;
 
+    private Date ultimaModificacion;
 
-
+    @ManyToMany(mappedBy = "categorias")
+    @JsonIgnore
+    private Set<Pelicula> peliculas = new HashSet<>();
 }

@@ -30,7 +30,7 @@ public class Pelicula {
 
     private String idioma;
 
-    @Column( length = 50)
+    @Column(length = 50)
     private String idiomaOriginal;
 
     private Period periodoAlquiler;
@@ -48,6 +48,14 @@ public class Pelicula {
     private String caracteristicasEspecialesStr;
 
     private Date ultimaModificacion;
+
+    @ManyToMany
+    @JoinTable(
+            name = "pelicula_categoria",
+            joinColumns = @JoinColumn(name = "id_pelicula", referencedColumnName = "id_pelicula"),
+            inverseJoinColumns = @JoinColumn(name = "id_categoria", referencedColumnName = "id_categoria")
+    )
+    private Set<Categoria> categorias = new HashSet<>();
 
     public Set<String> getCaracteristicasEspeciales() {
         if(caracteristicasEspecialesStr == null) {
